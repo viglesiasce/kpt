@@ -21,7 +21,7 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 COPY . .
-RUN go build -v -o /usr/local/bin/kpt ./
+RUN go build -ldflags "-linkmode external -extldflags -static" -v -o /usr/local/bin/kpt ./
 
 FROM alpine:latest
 RUN apk update && apk upgrade && \
